@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection - Project 6K</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            /* very basic, minimal, non-posh font */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #000;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 24px;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            margin-bottom: 60px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            max-width: 700px;
+            width: 100%;
+            margin-bottom: 60px;
+            gap: 40px;
+            /* space between image and text */
+        }
+
+        .item img {
+            width: 250px;
+            /* made small */
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .date {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Mobile layout */
+        @media (max-width: 600px) {
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .item img {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>collection</h1>
+
+    <div class="item">
+        <img src="1.png" alt="Collection Item 1">
+        <div class="text-content">
+            <div class="date">18/7/26</div>
+            <div class="description">start of the sereies this was greatly inspired by the tame impala album currents
+                the flowing purple dress and the silver ball thats hanging and i love how it turned out</div>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="2.png" alt="Collection Item 2">
+        <div class="text-content">
+            <div class="date">19/7/26</div>
+            <div class="description">i was watching wire today and i always wanted to draw dark skin characters</div>
+        </div>
+    </div>
+</body>
+
+</html>

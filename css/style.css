@@ -1,0 +1,142 @@
+/* =========================================================
+   PROJECT 6K — global stylesheet
+   Design language: municipal signage / route markers.
+   White ground, hairline ink rules, one warning-red accent,
+   one route-blue accent used only for coordinates.
+   ========================================================= */
+
+:root{
+  --paper:      #ffffff;
+  --paper-dim:  #fafaf9;
+  --ink:        #141414;
+  --ink-soft:   #6b6b68;
+  --line:       #e4e3df;
+  --line-strong:#c9c8c3;
+  --red:        #c1401f;   /* warning-sign red   */
+  --blue:       #1c4d63;   /* route-marker blue  */
+
+  --display: "Oswald", "Arial Narrow", sans-serif;
+  --body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:    "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --gap: 24px;
+  --radius: 2px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a{ color: inherit; text-decoration: none; }
+
+button{
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection{ background: var(--red); color: var(--paper); }
+
+/* focus ring — visible, on-brand, never suppressed */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible{
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+     transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- utility ---------- */
+.eyebrow{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.mono{ font-family: var(--mono); }
+
+.sr-only{
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---------- site chrome ---------- */
+.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(20px, 5vw, 56px);
+  z-index: 40;
+  mix-blend-mode: normal;
+}
+
+.site-header .mark{
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.site-header .mark span{ color: var(--red); }
+
+.site-nav{
+  display: flex;
+  gap: 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-nav a{
+  position: relative;
+  padding-bottom: 3px;
+  color: var(--ink-soft);
+  transition: color 0.15s ease;
+}
+.site-nav a:hover,
+.site-nav a[aria-current="page"]{ color: var(--ink); }
+
+.site-nav a[aria-current="page"]::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 2px;
+  background: var(--red);
+}
+
+.site-footer{
+  border-top: 1px solid var(--line);
+  padding: 28px clamp(20px, 5vw, 56px) 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+.site-footer a{ color: var(--ink-soft); }
+.site-footer a:hover{ color: var(--red); }
