@@ -1,72 +1,85 @@
-# Project 6K — site template
+# Project 6K — Interactive Art Showcase
 
-A minimal, signage-inspired template for showcasing a daily 6000×6000px
-canvas project. Three pages, no build step, no framework — open
-`index.html` in a browser or drop the folder on any static host
-(GitHub Pages, Netlify, Vercel, etc).
+Project 6K is a highly minimal, signage-inspired personal portfolio site showcasing a daily art project. The project documents the process of drawing something every day on a massive 6000×6000 pixel canvas.
 
-## Structure
+The site is built with pure HTML and CSS, designed to be lightweight, responsive, and extremely clean. There is no build step or framework involved; it runs statically out of any web server or directly from `index.html`.
+
+---
+
+## What the Website Is
+
+This website serves as an interactive home, showcase, and archive for **Project 6K**. The concept is structured around a central signage post (a pole with directional signboards) that routes visitors to different sections of the project:
+*   **The Interactive Home (`index.html`)**: Features an illustrated signage image with invisible interactive hotspots.
+*   **The Canvas (`canvas.html`)**: Displays the massive 6000×6000px composite canvas image in a clean, small preview.
+*   **The Collection (`collection.html`)**: A chronologically ordered, side-by-side log of daily entries, providing context, dates, and inspiration behind individual pieces.
+*   **The About Page (`about.html`)**: A simple, central text section detailing the project's background and social media links.
+
+---
+
+## Page-by-Page Breakdown & How It Works
+
+### 1. Home Page (`index.html`)
+The landing page uses a custom layout featuring the main UI artwork (`Untitled104.png`). 
+
+*   **Invisible Clickable Areas**: Absolute-positioned, transparent overlay anchors (`.clickable-area`) are mapped via percentages directly onto the signage illustration:
+    *   **Red Signboard** $\rightarrow$ `canvas.html`
+    *   **Blue Signboard** $\rightarrow$ `collection.html`
+    *   **"6K" Box** $\rightarrow$ `about.html`
+*   **Interactive Tooltips**: When hovering over any interactive component on desktop, a tooltip fades in showing its destination or state:
+    *   Hovering the **Red Sign** shows `"canvas"`
+    *   Hovering the **Blue Sign** shows `"collection"`
+    *   Hovering the **6K Box** shows `"about"`
+    *   Hovering the **AI 'x' Sign** (next to the red sign) shows `"no ai used"`
+*   **Mobile Responsiveness**: On screens narrower than 768px:
+    *   The container zooms in and shifts to center specifically on the signpost/pole, hiding the wider landscape elements to fit phone viewports.
+    *   Tooltips are disabled for a cleaner touch-based interface.
+
+### 2. Canvas Section (`canvas.html`)
+A minimal, clean page featuring:
+*   A lowercase black heading (`canvas`).
+*   The project's main image `canvas.png` displayed in a compact, centered layout (constrained to a maximum width of `300px` for quick loading and a unified, clean gallery feel).
+
+### 3. Collection (`collection.html`)
+The gallery archive page presenting the daily artwork.
+*   Displays a minimal lowercase heading (`collection`).
+*   Shows entries side-by-side: the artwork image (sized down to `250px` wide) on the left, and its text content (date + description) on the right.
+*   **Current entries**:
+    1.  `1.png` — Date: `18/7/26` — Description: *start of the series this was greatly inspired by the tame impala album currents the flowing purple dress and the silver ball thats hanging and i love how it turned out*
+    2.  `2.png` — Date: `19/7/26` — Description: *i was watching wire today and i always wanted to draw dark skin characters*
+*   **Responsive Flexbox**: Stacks the image above the text on narrow mobile screens (under 600px wide) for optimal readability.
+
+### 4. About (`about.html`)
+A simple center-aligned description detailing the project's purpose:
+*   Displays a minimal lowercase heading (`about`).
+*   Paragraph text: *"yeah so this is just a personal project of what i do everyday and ik its not the most impressive so basically i have this 6000x6000 canvas and i try to draw something on it everyday and showcase it here hope u guys like it vheck me out on @shoelesslace on instagram"*
+
+---
+
+## Aesthetic & Design Details
+
+*   **Minimal Typography**: The site utilizes standard system sans-serif fonts (`Arial, Helvetica, sans-serif`) rather than stylized web fonts to ensure a raw, basic, and non-posh aesthetic.
+*   **Color Scheme**: Pure white backgrounds (`#ffffff`) and deep blacks (`#000000`) keep focus entirely on the artwork. Tooltips use a slightly lighter off-black (`#222`).
+*   **Accessibility**: Visually hidden class wrappers (`.sr-only`) are used for headers to maintain search engine optimization (SEO) and screen-reader compatibility without breaking the minimal UI layout.
+
+---
+
+## File Structure
 
 ```
 project-6k/
-├── index.html          Home — the three-sign entry point
-├── canvas.html          The full canvas, zoomable & pannable
-├── collection.html      Archive grid of every daily entry
+├── index.html          # Interactive home page with custom hotspots & tooltips
+├── canvas.html         # Centered preview of the 6000x6000px canvas
+├── collection.html     # Archive log of individual daily drawings
+├── about.html          # Project summary and social info
+├── Untitled104.png     # Home page signage illustration
+├── canvas.png          # Main composite canvas art
+├── 1.png               # Artwork for entry 1
+├── 2.png               # Artwork for entry 2
 ├── css/
-│   ├── style.css         shared tokens + header/footer
-│   ├── canvas.css        canvas-page styles
-│   └── collection.css    collection-page + detail overlay styles
+│   └── style.css       # Shared styles (headers, footers)
 ├── js/
-│   ├── canvas.js          builds the grid, handles pan/zoom
-│   └── collection.js      renders cards, search, detail modal
+│   ├── canvas.js       # Grid handling (legacy)
+│   └── collection.js   # legacy js scripts
 └── data/
-    └── entries.js         ← the only file you need to edit day-to-day
+    └── entries.js      # legacy entries data file
 ```
-
-## What to edit
-
-**`data/entries.js`** is the single source of truth for both the
-Canvas and Collection pages.
-
-1. `PROJECT_CONFIG` — set your real start date, grid size, and total
-   day count. `gridCols × gridRows` should equal `totalDays` (currently
-   15 × 12 = 180, i.e. a six-month daily project).
-2. `SAMPLE_ENTRIES` — replace with your real days. Each entry:
-   ```js
-   {
-     day: 15,
-     date: "2026-01-15",
-     title: "Your title",
-     description: "The idea, inspiration, or story behind it.",
-     image: "assets/day-015.jpg",   // omit to use a placeholder tile
-     hue: 30                         // only used when there's no image
-   }
-   ```
-3. `COMPLETED_DAYS` — how many days are actually finished. This is
-   what fills in the Canvas grid; everything after it renders as an
-   empty, undrawn section.
-
-Any day without a matching entry in `SAMPLE_ENTRIES` is auto-padded
-with a placeholder ("Untitled — Day 0XX") so both pages always render
-a complete grid, even before you've uploaded real art.
-
-## Links to update
-
-- **Instagram** — replace `https://instagram.com/` in `index.html`,
-  `canvas.html`, and `collection.html` (three spots each in the nav
-  + footer) with your real profile URL.
-- Everything else (Canvas / Collection links) is already wired
-  between pages.
-
-## Notes on the design
-
-- Homepage: three "signs" mounted on a shared post — a nod to
-  route/signage imagery, standing in for a literal fork toward
-  Instagram, the Canvas, and the Collection.
-- One accent color (warning-sign red) is used for interaction and
-  emphasis; a second, quieter blue is reserved for coordinates only.
-- Placeholder artwork is a generated gradient tile (seeded by each
-  entry's `hue`) so the whole site works before a single image is
-  uploaded — swap in real files via the `image` field.
-- Typefaces: Oswald (display/headings), Inter (body), IBM Plex Mono
-  (day counters, dates, coordinates) — loaded from Google Fonts.
